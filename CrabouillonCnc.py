@@ -1,18 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# Courbet : install 29 janvier, jouer le 2/2 puis 7 mois.
-# courbet wiki
-# geste du peintre
-
 # biblio
-# https://www.youtube.com/watch?v=cEND_a7sLd0 - geste du peintre
 #
 #
-# /usr/local/lib/python2.7/dist-packages/odrive/ <-- python package to spy
-# https://github.com/madcowswe/ODrive/releases <-- firmware releases
-# https://github.com/madcowswe/ODrive/blob/master/tools/odrive_demo.py <-- pieces of python interface
-# https://github.com/madcowswe/ODrive/blob/master/Firmware/Board/v3/Src/adc.c <-- pieces of firmware
 
 # preferred python3
 # login pi/raspberry
@@ -25,12 +16,13 @@
 #   sshfs pi@192.168.2.5:. mntpi
 #
 # debug
-#  from from CourbetCnc import *
+#  from from CrabouillonCnc import *
 #
 # dev 
 #   https://www.eclipse.org/downloads/
 #   help/marketplace/pydev ... confirm, accept
-
+#   https://www.jetbrains.com/pycharm/  - more for PC dev
+#   mu ?
 
 GlobalParams={}
 DRV_GRBL=1
@@ -39,7 +31,7 @@ DRV_ESPUSB=3
 
 GlobalParams['AutoInstall']=True
 
-GlobalParams['rev'] = "CrabouillonCnc_20220910" # revision identification (Name_Date)
+GlobalParams['rev'] = "CrabouillonCnc_20230517" # revision identification (Name_Date)
 
 GlobalParams['Drive']=DRV_ESPUSB
 GlobalParams['Simul'] = False # True : simulator instead for devs, +False+ for real life
@@ -1175,13 +1167,13 @@ def EspUsbSend( GNum, BX, BY, BZ, BF):
 
   print( "EspUsbSend( GNum:%i, BX:%i, BY:%i, BZ:%i, BF:%i)\n" %( GNum, BX, BY, BZ, BF));
   if ('CRBL_AXEX1' in GlobalParams):
-      SerialSend( GlobalParams['CRBL_AXEX1'], 'CRBL_AXEX1', "GO X %i" % BX)
+      SerialSend( GlobalParams['CRBL_AXEX1'], 'CRBL_AXEX1', "GO X %i\n" % BX)
   if ('CRBL_AXEX2' in GlobalParams):
-      SerialSend( GlobalParams['CRBL_AXEX2'], 'CRBL_AXEX2', "GO X %i" % BX)
+      SerialSend( GlobalParams['CRBL_AXEX2'], 'CRBL_AXEX2', "GO X %i\n" % BX)
   if ('CRBL_AXEY' in GlobalParams):
-      SerialSend( GlobalParams['CRBL_AXEY'], 'CRBL_AXEY', "GO X %i" % BY)
+      SerialSend( GlobalParams['CRBL_AXEY'], 'CRBL_AXEY', "GO X %i\n" % BY)
   if ('CRBL_AXEZ' in GlobalParams):
-      SerialSend( GlobalParams['CRBL_AXEZ'], 'CRBL_AXEZ', "GO X %i" % BZ)
+      SerialSend( GlobalParams['CRBL_AXEZ'], 'CRBL_AXEZ', "GO X %i\n" % BZ)
   GlobalParams['GoNext'] = False
   
 def EspUsbRecv():
