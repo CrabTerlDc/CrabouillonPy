@@ -31,7 +31,7 @@ DRV_ESPUSB=3
 
 GlobalParams['AutoInstall']=True
 
-GlobalParams['rev'] = "CrabouillonCnc_20230517" # revision identification (Name_Date)
+GlobalParams['rev'] = "CrabouillonCnc_20230519" # revision identification (Name_Date)
 
 GlobalParams['Drive']=DRV_ESPUSB
 GlobalParams['Simul'] = False # True : simulator instead for devs, +False+ for real life
@@ -1193,7 +1193,7 @@ def EspUsbRecv():
     try:
         ResStr=SerialRecv( GlobalParams['CRBL_AXEZ'], 'CRBL_AXEZ', TimeoutSec)
     except serial.SerialException:
-        ResStr='AXEZ Disconnection and other serial error'
+        ResStr='AXEZ Disconnection or other communication line error'
 
 #---------------------- ACT_
 
