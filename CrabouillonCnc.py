@@ -1181,6 +1181,7 @@ def EspUsbRecv():
   global GoNext
   
   time.sleep( 4.5) # TODO_LATER ASP should send 'go' and etc ... now the do the move in 5 seconds - see GcodeG ... WishDTms , 5000
+  GlobalParams['GoNext']=True
   TimeoutSec = 0.02
   if ('CRBL_AXEX1' in GlobalParams):
     ResStr=SerialRecv( GlobalParams['CRBL_AXEX1'], 'CRBL_AXEX1', TimeoutSec)
@@ -1189,9 +1190,11 @@ def EspUsbRecv():
   if ('CRBL_AXEY' in GlobalParams):
     ResStr=SerialRecv( GlobalParams['CRBL_AXEY'], 'CRBL_AXEY', TimeoutSec)
   if ('CRBL_AXEZ' in GlobalParams):
-    ResStr=SerialRecv( GlobalParams['CRBL_AXEZ'], 'CRBL_AXEZ', TimeoutSec)
-  GlobalParams['GoNext'] = True # TODO_LATER wait to complete
-    
+    try:
+        ResStr=SerialRecv( GlobalParams['CRBL_AXEZ'], 'CRBL_AXEZ', TimeoutSec)
+    except serial.SerialException:
+        ResStr='AXEZ Disconnection and other serial error'
+
 #---------------------- ACT_
 
 def Act_TakePhoto( FileName, WorkDurationSec):
@@ -1642,6 +1645,8 @@ def MachineRun():
             GT = "none"
             GP = "none"
             for Cmd in LineSplit:
+                if (1 == len(Cmd)): # TODO_LATER support weird Gcode
+                    Trace("Warn - input file should have no space between coordinate '%s' and value for l.%i '%s'" % (Cmd, FileLineCount, LineStr))
                 if (len(Cmd)):
                     if(Cmd[0] == 'G'):
                         GNum = GcVal( Cmd)
