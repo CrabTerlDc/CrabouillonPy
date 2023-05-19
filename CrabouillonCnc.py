@@ -1167,13 +1167,13 @@ def EspUsbSend( GNum, BX, BY, BZ, BF):
 
   print( "EspUsbSend( GNum:%i, BX:%i, BY:%i, BZ:%i, BF:%i)\n" %( GNum, BX, BY, BZ, BF));
   if ('CRBL_AXEX1' in GlobalParams):
-      SerialSend( GlobalParams['CRBL_AXEX1'], 'CRBL_AXEX1', "GO X %i\n" % BX)
+      SerialSend( GlobalParams['CRBL_AXEX1'], 'CRBL_AXEX1', "G0 X %i" % BX)
   if ('CRBL_AXEX2' in GlobalParams):
-      SerialSend( GlobalParams['CRBL_AXEX2'], 'CRBL_AXEX2', "GO X %i\n" % BX)
+      SerialSend( GlobalParams['CRBL_AXEX2'], 'CRBL_AXEX2', "G0 X %i" % BX)
   if ('CRBL_AXEY' in GlobalParams):
-      SerialSend( GlobalParams['CRBL_AXEY'], 'CRBL_AXEY', "GO X %i\n" % BY)
+      SerialSend( GlobalParams['CRBL_AXEY'], 'CRBL_AXEY', "G0 X %i" % BY)
   if ('CRBL_AXEZ' in GlobalParams):
-      SerialSend( GlobalParams['CRBL_AXEZ'], 'CRBL_AXEZ', "GO X %i\n" % BZ)
+      SerialSend( GlobalParams['CRBL_AXEZ'], 'CRBL_AXEZ', "G0 X %i" % BZ)
   GlobalParams['GoNext'] = False
   
 def EspUsbRecv():
